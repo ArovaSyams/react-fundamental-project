@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
+import { AppContext } from "../context/Context";
 
 export default function BlogDetail() {
   const params = useParams();
@@ -25,6 +26,9 @@ export default function BlogDetail() {
     getArticle();
   }, [params]);
 
+  const context = useContext(AppContext);
+  console.log(context);
+
   if(notFound) {
     return <h1>Artikel tidak ditemukan :(</h1>
   }
@@ -32,11 +36,17 @@ export default function BlogDetail() {
     <section className="section">
       {loading ? <i>Sedang memuat</i> : (
         <article className="article">
-          <h1 className="article-title">{article.title}</h1>
+          <h1 className="article-title">{article.title}</h1>  
           <time className="article-time">{new Date(article.publishedAt).toLocaleDateString()}</time>
           <img className="article-image" src={article.imageUrl} alt={article.title} />
           <p className="article-summary">{article.summary}</p>
           <p className="article-source">Source: <a href={article.url} target="_blank" rel="noreferrer">{article.newsSite}</a></p>
+
+          <div>
+            <img src={"/logo192.png"} alt="logo" width="40px" />
+            <p >{context.user.name}</p>
+          </div>
+          
         </article>
       )}
     </section>  
