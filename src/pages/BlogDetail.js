@@ -27,7 +27,6 @@ export default function BlogDetail() {
   }, [params]);
 
   const context = useContext(AppContext);
-  console.log(context);
 
   if(notFound) {
     return <h1>Artikel tidak ditemukan :(</h1>

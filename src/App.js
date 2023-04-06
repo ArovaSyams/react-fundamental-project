@@ -1,27 +1,12 @@
 import './App.css';
 import { Link, Outlet} from 'react-router-dom';
-import { AppContext } from './context/Context';
-import { useContext, useEffect, useState } from 'react';
+import { AppProvider } from './context/Context';
 
 function App() {
-  const [user, setUser] = useState({});
-
-  useEffect(() => {
-    const user = {
-      name: 'Wifqo Arova',
-      avatar: 'Ini avatar'
-    }
-
-    setUser(user);
-  }, []);
   
-  const appContextValue = {
-    user: user,
-    theme: 'dark'
-  }
 
   return (
-    <AppContext.Provider value={appContextValue}>
+    <AppProvider>
     <div className="app">
       <div className='brand'>ArovaStack</div>
       <nav className='nav'>
@@ -35,7 +20,7 @@ function App() {
         <Outlet/>
       </div>
     </div>
-    </AppContext.Provider>
+    </AppProvider>
   );
 }
 
